@@ -249,14 +249,13 @@ CEXPORT int bingoInsertRecodrArrObj(int db, int arr)
 	BINGO_BEGIN_DB(db)
 	{
 		int out_array = indigoCreateArray();
-		Index &bingo_index = _bingo_instances.ref(db);
 
 		PtrArray<IndigoObject>& obj_arr = IndigoArray::cast(self.getObject(arr)).objects;
 
 		for (int i = 0; i < obj_arr.size(); i++)
 		{
-			int itemId = indigoAt(arr, i);
-			indigoArrayAdd(out_array, bingoInsertRecordObj(db, itemId));
+			int item_id = indigoAt(arr, i);
+			indigoArrayAdd(out_array, bingoInsertRecordObj(db, item_id));
 		}
 
 		return out_array;

@@ -28,7 +28,7 @@ CEXPORT int bingoCloseDatabase (int db);
 // Record insertion/deletion
 //
 CEXPORT int bingoInsertRecordObj (int db, int obj);
-CEXPORT int bingoInsertRecodrArrObj(int db, int molecules);
+CEXPORT int bingoInsertRecodrArrObj(int db, int arr);
 CEXPORT int bingoInsertRecordObjWithId (int db, int obj, int id);
 CEXPORT int bingoInsertRecordObjWithExtFP (int db, int obj, int fp);
 CEXPORT int bingoInsertRecordObjWithIdAndExtFP (int db, int obj, int id, int fp);
