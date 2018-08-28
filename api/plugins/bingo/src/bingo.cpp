@@ -21,6 +21,7 @@
 #include "indigo_reaction.h"
 #include "indigo_fingerprints.h"
 #include "indigo_cpp.h"
+#include "indigo_array.h"
 #include "bingo_internal.h"
 
 #include "bingo_index.h"
@@ -241,6 +242,27 @@ CEXPORT int bingoInsertRecordObj (int db, int obj)
       return _insertObjectToDatabase (db, self, bingo_index, indigo_obj, obj_id);
    }
    BINGO_END(-1);
+}
+
+CEXPORT int bingoInsertRecodrArrObj(int db, int arr)
+{
+	BINGO_BEGIN_DB(db)
+	{
+		int out_array = indigoCreateArray();
+		Index &bingo_index = _bingo_instances.ref(db);
+
+		PtrArray<IndigoObject>& obj_arr = IndigoArray::cast(self.getObject(arr)).objects;
+
+		for (int i = 0; i < obj_arr.size(); i++)
+		{
+			int itemId = indigoAt(arr, i);
+			indigoArrayAdd(out_array, bingoInsertRecordObj(db, itemId));
+		}
+
+		return out_array;
+
+	}
+	BINGO_END(-1);
 }
 
 CEXPORT int bingoInsertRecordObjWithId (int db, int obj, int id)
